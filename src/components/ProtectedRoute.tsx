@@ -1,20 +1,7 @@
-import { Navigate, useOutletContext, Route } from "react-router-dom";
-import { PropsWithChildren } from "react";
+import { Outlet } from "react-router-dom";
 
-interface ProtectedRouteParams extends PropsWithChildren {
-  role: string;
+function ProtectedRoute() {
+  return <Outlet />;
 }
-
-const ProtectedRoute = ({ role, children }: ProtectedRouteParams) => {
-  const context = useOutletContext();
-  console.log(role);
-  console.log(context);
-  // if (!context.user || !context.user?.role.includes(role)) {
-  // return <Navigate to="/" replace />;
-  // }
-
-  return <Route>{children}</Route>;
-  // return <Outlet context={context}>{children}</Outlet>;
-};
 
 export default ProtectedRoute;

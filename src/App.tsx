@@ -1,25 +1,21 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import UserList from "./pages/UserList";
+import UserList from "./pages/users/UserList";
 import Login from "./pages/Login";
-import NewUserProfile from "./pages/NewUserProfile";
-import UserProfile from "./pages/UserProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
-import AuthProvider from "./contexts/AuthProvider";
+import NewUser from "./pages/users/AddUser";
+import EditUser from "./pages/users/EditUser";
 
 function App() {
   return (
-    <AuthProvider>
-      <Routes>
-        <Route path="/" element={<Navigate to="posts" />} />
-        <Route path="login" element={<Login />} />
-        <ProtectedRoute role="asd">
-          <Route path="posts" element={<UserList />}>
-            <Route path="new" element={<NewUserProfile />} />
-            <Route path=":postId" element={<UserProfile />} />
-          </Route>
-        </ProtectedRoute>
-      </Routes>
-    </AuthProvider>
+    <Routes>
+      <Route path="/" element={<Navigate to="users" />} />
+      <Route path="login" element={<Login />} />
+      <Route path="users" element={<ProtectedRoute />}>
+        <Route index={true} element={<UserList />} />
+        <Route path="new" element={<NewUser />} />
+        <Route path=":userId" element={<EditUser />} />
+      </Route>
+    </Routes>
   );
 }
 
