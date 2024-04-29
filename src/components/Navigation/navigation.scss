@@ -1,0 +1,16 @@
+.nav {
+  background-color: $gray-color;
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  &__container {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  input[type="button"] {
+    width: fit-content;
+  }
+}

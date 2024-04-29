@@ -1,0 +1,25 @@
+.input-group {
+  margin-bottom: 1rem;
+
+  label {
+    margin-left: 3px;
+  }
+
+  input {
+    margin-top: 0.5rem;
+    &:focus {
+      outline: none;
+    }
+
+    &.invalid {
+      border: 1px solid $invalid-color;
+    }
+  }
+
+  .valid-error {
+    margin-left: 5px;
+    margin-top: 3px;
+    color: $invalid-color;
+    font-size: 1rem;
+  }
+}

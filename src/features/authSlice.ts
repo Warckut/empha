@@ -5,9 +5,11 @@ import { RootState } from "../app/store";
 const initialState = {
   token: null,
   user: null,
+  error: null,
 } as {
   token: string | null;
   user: { username: string; password: string } | null;
+  error: string | null;
 };
 
 export const AuthSlice = createSlice({
@@ -18,27 +20,29 @@ export const AuthSlice = createSlice({
       state.user = null;
       state.token = null;
     },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) =>
-    builder.addCase(loginUser.fulfilled, (state, { payload }) => {
-      state.token = payload.token;
-      state.user = {
-        username: payload.username,
-        password: payload.password,
-      };
-    }),
+    builder
+      .addCase(loginUser.fulfilled, (state, { payload }) => {
+        state.token = payload.token;
+        state.user = {
+          username: payload.username,
+          password: payload.password,
+        };
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.error = action.error.message ?? null;
+      }),
 });
 
-export const selectToken = createSelector(
+export const selectAuth = createSelector(
   [(state: RootState) => state.auth],
-  (data) => data.token
+  (data) => data
 );
 
-export const selectUser = createSelector(
-  [(state: RootState) => state.auth],
-  (data) => data.user
-);
-
-export const { logout } = AuthSlice.actions;
+export const { logout, clearError } = AuthSlice.actions;
 
 export default AuthSlice.reducer;

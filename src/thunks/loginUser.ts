@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 interface LoginPayload {
@@ -15,7 +15,7 @@ const loginUser = createAsyncThunk(
   }): Promise<LoginPayload> => {
     // const res = await axios({
     //   method: "POST",
-    //   url: "https://test-assignment.emphasoft.com/api/login",
+    //   url: "https://tesdfsfphasoft.com/api/login",
     //   data: user,
     //   headers: {
     //     "Content-Type": "application/json",

@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: #3d3d3d;
+  font-style: normal;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+
+input[type="text"],
+input[type="submit"],
+input[type="button"] {
+  font-size: 1.1rem;
+  color: #3d3d3d;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  padding: 0.8rem;
+}
+
+input[type="text"] {
+  width: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 30px;
+  max-width: 65.625rem;
+}

@@ -1,0 +1,42 @@
+.wrapper {
+  margin: 0 auto;
+  margin-top: 100px;
+  max-width: 25rem;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    h1 {
+      align-self: center;
+      margin-bottom: 1rem;
+    }
+
+    .feedback {
+      margin-bottom: 1rem;
+      color: #c50000;
+      background-color: rgb(255, 233, 233);
+      padding: 2rem;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    input[type="submit"] {
+      align-self: flex-end;
+      margin-top: 1rem;
+      background-color: $gray-color;
+      &:hover {
+        background-color: $dartk-gray-color;
+      }
+      &:active {
+        background-color: rgba($gray-color, 0.5);
+        color: rgba($black-color, 0.5);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 430px) {
+  input[type="submit"] {
+    width: 10rem;
+  }
+}
