@@ -1,0 +1,62 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { RootState } from "../app/store";
+
+type User = {
+  id: number;
+  username: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  is_active: boolean;
+  last_login: string;
+  is_superuser: boolean;
+};
+
+type AddUserPayload = Pick<
+  User,
+  "first_name" | "is_active" | "last_name" | "username" | "password"
+>;
+
+export const apiSlice = createApi({
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:5000/api",
+    prepareHeaders: (headers, { getState }) => {
+      headers.set("Content-Type", "application/json");
+      const accessToken = (getState() as RootState).auth.token;
+      if (accessToken) {
+        headers.set("Authorization", `Bearer ${accessToken}`);
+      }
+      return headers;
+    },
+  }),
+  tagTypes: ["User"],
+  endpoints: (builder) => ({
+    getUsers: builder.query<User[], void>({
+      query: () => "/users",
+    }),
+    updateUser: builder.mutation<User, Partial<User> & Pick<User, "id">>({
+      query: ({ id, ...put }) => ({
+        url: `users/${id}`,
+        method: "PUT",
+        body: put,
+      }),
+      transformErrorResponse: (response: { status: string | number }) =>
+        response.status,
+      invalidatesTags: ["User"],
+    }),
+    addUser: builder.mutation<User, AddUserPayload>({
+      query: (post) => ({
+        url: `users`,
+        method: "POST",
+        body: post,
+      }),
+      transformErrorResponse: (response: { status: string | number }) =>
+        response.status,
+      invalidatesTags: ["User"],
+    }),
+  }),
+});
+
+export const { useGetUsersQuery, useUpdateUserMutation, useAddUserMutation } =
+  apiSlice;
