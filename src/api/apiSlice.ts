@@ -23,6 +23,7 @@ export const apiSlice = createApi({
     baseUrl: "https://test-assignment.emphasoft.com/api/v1",
     prepareHeaders: (headers, { getState }) => {
       headers.set("Content-Type", "application/json");
+      headers.set("accept", "application/json");
       const accessToken = (getState() as RootState).auth.token;
       if (accessToken) {
         headers.set("Authorization", `Bearer ${accessToken}`);
