@@ -15,6 +15,7 @@ function TextInput<T extends FieldValues>(
       <input
         className={fieldState.invalid ? "invalid" : ""}
         type="text"
+        autoComplete="off"
         id={props.label}
         {...field}
       />

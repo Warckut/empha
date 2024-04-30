@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../app/store";
 
-type User = {
+export type User = {
   id: number;
   username: string;
   first_name: string;

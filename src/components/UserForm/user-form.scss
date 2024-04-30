@@ -1,0 +1,14 @@
+form {
+  input[type="submit"] {
+    align-self: flex-end;
+    margin-top: 1rem;
+    background-color: $gray-color;
+    &:hover {
+      background-color: $dark-gray-color;
+    }
+    &:active {
+      background-color: rgba($gray-color, 0.5);
+      color: rgba($black-color, 0.5);
+    }
+  }
+}

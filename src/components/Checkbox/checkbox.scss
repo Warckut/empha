@@ -1,0 +1,47 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 1px solid $gray-color;
+    border-radius: 3px;
+    position: relative;
+    margin-right: 0.5rem;
+
+    &:after {
+      display: none;
+      width: 100%;
+      height: 100%;
+      content: "";
+      background: url("../../assets/images/check-solid.svg") no-repeat;
+      background-position: center;
+      background-size: 80%;
+    }
+
+    &:hover {
+      opacity: 70%;
+    }
+
+    &:active {
+      opacity: 40%;
+    }
+
+    &.checked {
+      &:after {
+        display: block;
+      }
+    }
+
+    &:hover {
+      border-color: $dark-gray-color;
+    }
+
+    &:active {
+      border-color: $black-color;
+    }
+  }
+}

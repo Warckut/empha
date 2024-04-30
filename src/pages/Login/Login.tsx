@@ -19,7 +19,7 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { user, error } = useSelector(selectAuth);
 
-  const { handleSubmit, control, reset, clearErrors } = useForm<Inputs>({
+  const { handleSubmit, control, reset } = useForm<Inputs>({
     resolver: yupResolver<Inputs>(
       yup.object().shape({
         username: yup
@@ -39,8 +39,7 @@ const Login = () => {
   useEffect(() => {
     reset();
     dispatch(clearError());
-    // clearErrors();
-  }, [dispatch, reset, clearErrors]);
+  }, [dispatch, reset]);
 
   if (user) return <Navigate to="/users" />;
 
@@ -63,7 +62,7 @@ const Login = () => {
           label="Password"
           defaultValue=""
         />
-        <input type="submit" value="Войти" />
+        <input type="submit" value="Login" />
       </form>
     </div>
   );

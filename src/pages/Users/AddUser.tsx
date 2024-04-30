@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useAddUserMutation } from "../../api/apiSlice";
+import UserForm from "../../components/UserForm/UserForm";
 
 const AddUser = () => {
   const [addUser, result] = useAddUserMutation();
@@ -9,23 +10,10 @@ const AddUser = () => {
   }, [result]);
 
   return (
-    <>
+    <div className="container">
       <h1>profile</h1>
-      <button
-        onClick={() => {
-          addUser({
-            username: "AAAAA",
-            first_name: "AAAAA",
-            last_name: "string",
-            password:
-              "Y'THsY}<,b1{Y|)^R#r+D{{tO*(Ils+r<& UvfQmWzr^!-),f/Bagsc5(yt",
-            is_active: true,
-          });
-        }}
-      >
-        Add user
-      </button>
-    </>
+      <UserForm onSubmit={(user) => addUser(user)} />
+    </div>
   );
 };
 
