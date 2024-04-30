@@ -20,7 +20,7 @@ type AddUserPayload = Pick<
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
+    baseUrl: "https://test-assignment.emphasoft.com/api/v1",
     prepareHeaders: (headers, { getState }) => {
       headers.set("Content-Type", "application/json");
       const accessToken = (getState() as RootState).auth.token;

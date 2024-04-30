@@ -14,20 +14,47 @@ const loginUser = createAsyncThunk(
     password: string;
   }): Promise<LoginPayload> => {
     // const res = await axios({
-    //   method: "POST",
-    //   url: "https://tesdfsfphasoft.com/api/login",
+    //   method: "post",
+    //   url: "https://test-assignment.emphasoft.com/api/v1/login",
     //   data: user,
     //   headers: {
     //     "Content-Type": "application/json",
     //   },
     // });
+    console.log(user);
+    // const res = await axios.post(
+    //   "https://test-assignment.emphasoft.com/api/v1/login",
+    //   user,
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       accept: "application/json",
+    //       "X-CSRFTOKEN":
+    //         "wETviWr15l2J8myYqxLb8QmmLc8gG8CtwIBt3F8zlnC1aXZuYWCr1ZkiKTfrgQLI",
+    //     },
+    //   }
+    // );
 
-    // return res.data;
-    return {
-      token: "sdfsdfsd",
-      username: user.username,
-      password: user.password,
-    };
+    const res = await fetch(
+      "https://test-assignment.emphasoft.com/api/v1/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "application/json",
+          "X-CSRFTOKEN":
+            "wETviWr15l2J8myYqxLb8QmmLc8gG8CtwIBt3F8zlnC1aXZuYWCr1ZkiKTfrgQLI",
+        },
+        body: JSON.stringify(user),
+      }
+    );
+
+    return res.json();
+    // return {
+    //   token: "sdfsdfsd",
+    //   username: user.username,
+    //   password: user.password,
+    // };
   }
 );
 
