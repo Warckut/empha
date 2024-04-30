@@ -5,9 +5,9 @@ import usePrepareUserData from "../../../hooks/usePrepareData";
 import Button from "../../../components/Button/Button";
 import { formatter } from "./utils";
 import "./user-list.scss";
-import triangle from "../../../assets/images/triangle.png";
+import triangle from "../../../assets/images/triangle.svg";
 
-const view = { ascending: 0, descending: 180 };
+const view = { ascending: 90, descending: -90 };
 
 const UserList = () => {
   const navigate = useNavigate();
