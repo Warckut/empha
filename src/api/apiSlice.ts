@@ -20,7 +20,7 @@ type AddUserPayload = Pick<
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://test-assignment.emphasoft.com/api/v1",
+    baseUrl: "https://test-assignment.emphasoft.com/api/v1/",
     prepareHeaders: (headers, { getState }) => {
       headers.set("Content-Type", "application/json");
       headers.set("accept", "application/json");
@@ -30,11 +30,12 @@ export const apiSlice = createApi({
       }
       return headers;
     },
+    credentials: "include",
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
     getUsers: builder.query<User[], void>({
-      query: () => "/users",
+      query: () => "users/",
     }),
     updateUser: builder.mutation<User, Partial<User> & Pick<User, "id">>({
       query: ({ id, ...put }) => ({
@@ -48,7 +49,7 @@ export const apiSlice = createApi({
     }),
     addUser: builder.mutation<User, AddUserPayload>({
       query: (post) => ({
-        url: `users`,
+        url: `users/`,
         method: "POST",
         body: post,
       }),

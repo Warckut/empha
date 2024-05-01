@@ -13,18 +13,23 @@ const loginUser = createAsyncThunk(
     password: string;
   }): Promise<LoginPayload> => {
     const res = await fetch(
-      "https://test-assignment.emphasoft.com/api/v1/login",
+      "https://test-assignment.emphasoft.com/api/v1/login/",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           accept: "application/json",
-          "X-CSRFTOKEN":
-            "wETviWr15l2J8myYqxLb8QmmLc8gG8CtwIBt3F8zlnC1aXZuYWCr1ZkiKTfrgQLI",
         },
         body: JSON.stringify(user),
       }
     );
+
+    if (!res.ok) {
+      if (res.status === 400) throw new Error("incorrect username or password");
+      if (res.status >= 500) throw new Error("internal server error");
+      throw new Error("unknown error");
+    }
+
     return res.json();
   }
 );

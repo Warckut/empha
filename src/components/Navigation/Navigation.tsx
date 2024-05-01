@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { logout, selectAuth } from "../../features/authSlice";
-import { AppDispatch } from "../../app/store";
+import { logout } from "../../features/authSlice";
+import { AppDispatch, RootState } from "../../app/store";
 import { Link } from "react-router-dom";
 import "./navigation.scss";
 
 function Navigation() {
   const dispatch = useDispatch<AppDispatch>();
-  const { user } = useSelector(selectAuth);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   return (
     <nav className="nav">
