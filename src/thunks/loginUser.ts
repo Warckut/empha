@@ -21,7 +21,6 @@ const loginUser = createAsyncThunk(
           accept: "application/json",
         },
         body: JSON.stringify(user),
-        credentials: "include",
       }
     );
 

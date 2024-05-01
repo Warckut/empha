@@ -24,13 +24,11 @@ export const apiSlice = createApi({
     prepareHeaders: (headers, { getState }) => {
       headers.set("Content-Type", "application/json");
       headers.set("accept", "application/json");
+
       const accessToken = (getState() as RootState).auth.token;
-      if (accessToken) {
-        headers.set("Authorization", `Bearer ${accessToken}`);
-      }
+      if (accessToken) headers.set("Authorization", `Token ${accessToken}`);
       return headers;
     },
-    credentials: "include",
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({

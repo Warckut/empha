@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./login.scss";
+import Spinner from "../../components/Spinner/Loading";
 
 interface Inputs {
   username: string;
@@ -17,7 +18,9 @@ interface Inputs {
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { user, error } = useSelector((state: RootState) => state.auth);
+  const { user, error, loading } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   const { handleSubmit, control, reset } = useForm<Inputs>({
     resolver: yupResolver<Inputs>(
@@ -27,7 +30,10 @@ const Login = () => {
           .strict()
           .trim("It cannot contain spaces at the end")
           .required("Required field"),
-        password: yup.string().required("Required field"),
+        password: yup
+          .string()
+          .required("Required field")
+          .min(8, "Password should be 8+ characters"),
       })
     ),
   });
@@ -47,6 +53,7 @@ const Login = () => {
     <div className="wrapper">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign In</h1>
+        {loading && <Spinner />}
         {error && <div className="feedback">{error}</div>}
         <TextInput
           name="username"

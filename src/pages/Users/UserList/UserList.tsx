@@ -6,6 +6,7 @@ import Button from "../../../components/Button/Button";
 import { formatter } from "./utils";
 import "./user-list.scss";
 import triangle from "../../../assets/images/triangle.svg";
+import Spinner from "../../../components/Spinner/Loading";
 
 const view = { ascending: 90, descending: -90 };
 
@@ -19,7 +20,19 @@ const UserList = () => {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Spinner />
+      </div>
+    );
   }
 
   if (isError) {
