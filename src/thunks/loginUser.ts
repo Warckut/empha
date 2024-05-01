@@ -13,7 +13,7 @@ const loginUser = createAsyncThunk(
     password: string;
   }): Promise<LoginPayload> => {
     const res = await fetch(
-      "https://test-assignment.emphasoft.com/api/v1/login",
+      "https://test-assignment.emphasoft.com/api/v1/login/",
       {
         method: "POST",
         headers: {
