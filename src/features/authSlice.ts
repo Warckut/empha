@@ -1,9 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import loginUser from "../thunks/loginUser";
+import { RootState } from "../app/store";
 
 const initialState = {
   token: null,
-  user: null, 
+  user: null,
   error: null,
 } as {
   token: string | null;
@@ -33,10 +34,14 @@ export const AuthSlice = createSlice({
         };
       })
       .addCase(loginUser.rejected, (state, action) => {
-        console.log(action);
         state.error = action.error.message ?? null;
       }),
 });
+
+export const selectAuth = createSelector(
+  [(state: RootState) => state.auth],
+  (data) => data
+);
 
 export const { logout, clearError } = AuthSlice.actions;
 

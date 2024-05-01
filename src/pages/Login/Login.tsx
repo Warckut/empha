@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../app/store";
+import { AppDispatch } from "../../app/store";
 import loginUser from "../../thunks/loginUser";
 import { Navigate } from "react-router-dom";
-import { clearError } from "../../features/authSlice";
+import { clearError, selectAuth } from "../../features/authSlice";
 import { useForm } from "react-hook-form";
 import TextInput from "../../components/TextInput/TextInput";
 import { useEffect } from "react";
@@ -17,7 +17,7 @@ interface Inputs {
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { user, error } = useSelector((state: RootState) => state.auth);
+  const { user, error } = useSelector(selectAuth);
 
   const { handleSubmit, control, reset } = useForm<Inputs>({
     resolver: yupResolver<Inputs>(
