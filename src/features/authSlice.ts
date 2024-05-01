@@ -1,6 +1,5 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import loginUser from "../thunks/loginUser";
-import { RootState } from "../app/store";
 
 const initialState = {
   token: null,
@@ -9,7 +8,7 @@ const initialState = {
 } as {
   token: string | null;
   user: { username: string; password: string } | null;
-  error: string | null;
+  error?: string | null;
 };
 
 export const AuthSlice = createSlice({
@@ -34,14 +33,9 @@ export const AuthSlice = createSlice({
         };
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.error = action.error.message ?? null;
+        state.error = action.error.message;
       }),
 });
-
-export const selectAuth = createSelector(
-  [(state: RootState) => state.auth],
-  (data) => data
-);
 
 export const { logout, clearError } = AuthSlice.actions;
 

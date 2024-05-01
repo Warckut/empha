@@ -19,12 +19,22 @@ const loginUser = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
           accept: "application/json",
-          "X-CSRFTOKEN":
-            "wETviWr15l2J8myYqxLb8QmmLc8gG8CtwIBt3F8zlnC1aXZuYWCr1ZkiKTfrgQLI",
         },
         body: JSON.stringify(user),
       }
     );
+
+    if (!res.ok) {
+      if (res.status === 400) {
+        throw new Error("wrong login or password");
+      }
+      if (res.status >= 500) {
+        throw new Error("internal server error");
+      }
+
+      throw new Error("unknown errror");
+    }
+
     return res.json();
   }
 );

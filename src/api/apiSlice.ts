@@ -30,6 +30,7 @@ export const apiSlice = createApi({
       }
       return headers;
     },
+    credentials: "include",
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
