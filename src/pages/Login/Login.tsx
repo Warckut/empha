@@ -8,8 +8,8 @@ import TextInput from "../../components/TextInput/TextInput";
 import { useEffect } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Spinner from "../../components/Loading/Loading";
 import "./login.scss";
-import Spinner from "../../components/Spinner/Loading";
 
 interface Inputs {
   username: string;

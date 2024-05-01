@@ -31,7 +31,14 @@ function UserForm({ defaultValues, onSubmit }: UserFormProps) {
           .required("Required field"),
         first_name: yup.string().required("Required field"),
         last_name: yup.string().required("Required field"),
-        password: yup.string().required("Required field"),
+        password: yup
+          .string()
+          .min(8, "Password should be 8+ characters, 1 capital, 1 numeric")
+          .matches(
+            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/,
+            "Password should be 8+ characters, 1 capital, 1 numeric"
+          )
+          .required("Required field"),
         is_active: yup.bool().default(false),
       })
     ),

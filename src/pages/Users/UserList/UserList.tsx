@@ -3,16 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "../../../api/apiSlice";
 import usePrepareUserData from "../../../hooks/usePrepareData";
 import Button from "../../../components/Button/Button";
-import { formatter } from "./utils";
-import "./user-list.scss";
 import triangle from "../../../assets/images/triangle.svg";
-import Spinner from "../../../components/Spinner/Loading";
+import Loading from "../../../components/Loading/Loading";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../app/store";
+import { logout } from "../../../features/authSlice";
+import "./user-list.scss";
 
 const view = { ascending: 90, descending: -90 };
 
 const UserList = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { data: users, isLoading, isError, error } = useGetUsersQuery();
+  const { data: users, isLoading, error } = useGetUsersQuery();
   const [filterValue, setFilterValue] = useState("");
   const [preparedUsers, requestSort, sortDir] = usePrepareUserData(
     users,
@@ -20,28 +23,19 @@ const UserList = () => {
   );
 
   if (isLoading) {
-    return (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Spinner />
-      </div>
-    );
+    return <Loading />;
   }
 
-  if (isError) {
-    console.error(error);
+  if (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((error as any).status >= 400) {
+      dispatch(logout());
+    }
   }
 
   return (
     <div className="container">
-      <h1>list</h1>
+      <h1>List</h1>
       <div className="panel">
         <input
           type="text"
@@ -66,18 +60,16 @@ const UserList = () => {
             <th>name</th>
             <th>first name</th>
             <th>last name</th>
-            <th>last login</th>
             <th>action</th>
           </tr>
         </thead>
         <tbody>
           {preparedUsers.map((v) => (
             <tr key={v.id} className={v.is_active ? "active" : ""}>
-              <td>{v.id}</td>
+              <td style={{ textAlign: "center" }}>{v.id}</td>
               <td>{v.username}</td>
               <td>{v.first_name}</td>
               <td>{v.last_name}</td>
-              <td>{formatter.format(new Date(v.last_login))}</td>
               <td>
                 <Button name={"edit"} onClick={() => navigate(`${v.id}`)} />
               </td>

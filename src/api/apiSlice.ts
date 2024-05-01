@@ -8,7 +8,7 @@ export type User = {
   last_name: string;
   password: string;
   is_active: boolean;
-  last_login: string;
+  last_login: string | null;
   is_superuser: boolean;
 };
 
@@ -41,8 +41,8 @@ export const apiSlice = createApi({
         method: "PUT",
         body: put,
       }),
-      transformErrorResponse: (response: { status: string | number }) =>
-        response.status,
+      transformErrorResponse: (response) =>
+        response,
       invalidatesTags: ["User"],
     }),
     addUser: builder.mutation<User, AddUserPayload>({
@@ -51,8 +51,8 @@ export const apiSlice = createApi({
         method: "POST",
         body: post,
       }),
-      transformErrorResponse: (response: { status: string | number }) =>
-        response.status,
+      transformErrorResponse: (response) =>
+        response,
       invalidatesTags: ["User"],
     }),
   }),
