@@ -67,7 +67,9 @@ const UserList = () => {
           {preparedUsers.map((v) => (
             <tr key={v.id} className={v.is_active ? "active" : ""}>
               <td style={{ textAlign: "center" }}>{v.id}</td>
-              <td>{v.username}</td>
+              <td>
+                <span>{v.username}</span>
+              </td>
               <td>{v.first_name}</td>
               <td>{v.last_name}</td>
               <td>
